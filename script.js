@@ -76,7 +76,7 @@ async function placeOrder() {
   message += `\nTotal: NPR ${total}`;
 
   const BOT_TOKEN = "8721297737:AAHIFGFLK3gOX_T2Yq3_KWgA6csvt1Nykts";
-  const CHAT_ID = "1126605588"; // ⚠️ REPLACE THIS
+  const CHAT_ID = "847217259"; // ⚠️ REPLACE THIS
 
   try {
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
