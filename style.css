@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0B0B0B;
+  color: white;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 10px 10px;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.logo {
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.table-text {
+  color: #D4AF37;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.category {
+  color: #D4AF37;
+  margin-top: 20px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background: #D4AF37;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.cart {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  padding: 15px;
+}
