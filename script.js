@@ -7,6 +7,7 @@ let cart = [];
 
 const menuDiv = document.getElementById("menu");
 
+// RENDER MENU
 menu.forEach(cat => {
   const title = document.createElement("h2");
   title.innerText = cat.category;
@@ -30,16 +31,20 @@ menu.forEach(cat => {
   });
 });
 
+// ADD TO CART
 function addToCart(item) {
   const existing = cart.find(i => i.name === item.name);
+
   if (existing) {
     existing.qty++;
   } else {
     cart.push({ ...item, qty: 1 });
   }
+
   renderCart();
 }
 
+// RENDER CART
 function renderCart() {
   const cartDiv = document.getElementById("cartItems");
   cartDiv.innerHTML = "";
@@ -54,19 +59,43 @@ function renderCart() {
   document.getElementById("total").innerText = "Total: NPR " + total;
 }
 
-function placeOrder() {
-  let message = `Table: ${table}\n\n`;
+// 🚀 TELEGRAM AUTO ORDER
+async function placeOrder() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let message = `🍽️ MOZzO ORDER\n\nTable: ${table}\n\n`;
 
   cart.forEach(item => {
-    message += `${item.qty}x ${item.name}\n`;
+    message += `${item.qty}x ${item.name} - NPR ${item.qty * item.price}\n`;
   });
 
   let total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
   message += `\nTotal: NPR ${total}`;
 
-  const phone = "+9779820358419";
+  const BOT_TOKEN = "8721297737:AAHIFGFLK3gOX_T2Yq3_KWgA6csvt1Nykts";
+  const CHAT_ID = "8721297737"; // ⚠️ REPLACE THIS
 
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  try {
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message
+      })
+    });
 
-  window.open(url, "_blank");
+    alert("Order sent successfully!");
+    cart = [];
+    renderCart();
+
+  } catch (error) {
+    alert("Failed to send order!");
+    console.error(error);
+  }
 }
